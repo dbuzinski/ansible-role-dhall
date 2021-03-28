@@ -1,0 +1,56 @@
+---
+language: python
+services: docker
+sudo: required
+env:
+  global:
+    - ROLE_NAME: dhall
+  matrix:
+    - MOLECULE_DISTRO: ubi8
+      MOLECULE_IMAGE: registry.access.redhat.com/ubi8/ubi
+    - MOLECULE_DISTRO: ubi7
+      MOLECULE_IMAGE: registry.access.redhat.com/ubi7/ubi
+    - MOLECULE_DISTRO: centos8
+      MOLECULE_IMAGE: centos:8
+    - MOLECULE_DISTRO: centos7
+      MOLECULE_IMAGE: centos:7
+    - MOLECULE_DISTRO: ubuntu2104
+      MOLECULE_IMAGE: ubuntu:21.04
+    - MOLECULE_DISTRO: ubuntu2010
+      MOLECULE_IMAGE: ubuntu:20.10
+    - MOLECULE_DISTRO: ubuntu2004
+      MOLECULE_IMAGE: ubuntu:20.04
+    - MOLECULE_DISTRO: ubuntu1804
+      MOLECULE_IMAGE: ubuntu:18.04
+    - MOLECULE_DISTRO: debian10
+      MOLECULE_IMAGE: debian:buster
+    - MOLECULE_DISTRO: debian9
+      MOLECULE_IMAGE: debian:stretch
+    - MOLECULE_DISTRO: amazon2
+      MOLECULE_IMAGE: amazonlinux:2
+    - MOLECULE_DISTRO: amazon1
+      MOLECULE_IMAGE: amazonlinux:1
+    - MOLECULE_DISTRO: alpineedge
+      MOLECULE_IMAGE: alpine:edge
+    - MOLECULE_DISTRO: alpine313
+      MOLECULE_IMAGE: alpine:3.13
+    - MOLECULE_DISTRO: alpine312
+      MOLECULE_IMAGE: alpine:3.12
+    - MOLECULE_DISTRO: alpine311
+      MOLECULE_IMAGE: alpine:3.11
+    - MOLECULE_DISTRO: fedora35
+      MOLECULE_IMAGE: fedora:35
+    - MOLECULE_DISTRO: fedora34
+      MOLECULE_IMAGE: fedora:34
+    - MOLECULE_DISTRO: fedora33
+      MOLECULE_IMAGE: fedora:33
+    - MOLECULE_DISTRO: fedora32
+      MOLECULE_IMAGE: fedora:32
+before_install:
+  - docker pull quay.io/ansible/molecule:3.1.5
+  - docker run -it -v `pwd`:/$ROLE_NAME -v /var/run/docker.sock:/var/run/docker.sock -d --name build quay.io/ansible/molecule:3.1.5 sh
+script:
+  - docker exec -w /$ROLE_NAME -e MOLECULE_DISTRO=${MOLECULE_DISTRO} -e MOLECULE_IMAGE=${MOLECULE_IMAGE} build molecule test 
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

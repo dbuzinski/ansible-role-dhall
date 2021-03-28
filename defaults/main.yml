@@ -1,0 +1,4 @@
+---
+dhall_version: "1.38.1"
+dhall_to_json_version: "1.7.6"
+windows_install_dir: "%USERPROFILE%\\.dhall"

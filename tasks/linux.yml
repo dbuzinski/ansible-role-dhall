@@ -1,0 +1,60 @@
+---
+- name: install dependencies for tar
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - tar
+    - bzip2
+
+- name: download dhall
+  get_url:
+    url: https://github.com/dhall-lang/dhall-haskell/releases/download/{{ dhall_version }}/dhall-{{ dhall_version }}-x86_64-linux.tar.bz2
+    dest: "/tmp/dhall-{{ dhall_version }}-x86_64-linux.tar.bz2"
+
+- name: unarchive to temporary directory
+  shell: "tar -xjf dhall-{{ dhall_version }}-x86_64-linux.tar.bz2"
+  args:
+    chdir: /tmp/
+    creates: /tmp/bin/dhall
+    warn: false
+
+- name: move dhall to bin
+  copy:
+    src: "/tmp/bin/dhall"
+    dest: /usr/local/bin
+    remote_src: yes
+    mode: '+x'
+
+- name: download dhall-to-json
+  get_url:
+    url: https://github.com/dhall-lang/dhall-haskell/releases/download/{{ dhall_version }}/dhall-json-{{ dhall_to_json_version }}-x86_64-linux.tar.bz2
+    dest: "/tmp/dhall-json-{{ dhall_to_json_version }}-x86_64-linux.tar.bz2"
+
+- name: unarchive to temporary directory
+  shell: "tar -xjf dhall-json-{{ dhall_to_json_version }}-x86_64-linux.tar.bz2"
+  args:
+    chdir: /tmp/
+    creates: /tmp/bin/dhall-to-json
+    warn: false
+
+- name: move dhall-to-json to bin
+  copy:
+    src: "/tmp/bin/dhall-to-json"
+    dest: /usr/local/bin
+    remote_src: yes
+    mode: '+x'
+
+- name: move dhall-to-yaml to bin
+  copy:
+    src: "/tmp/bin/dhall-to-yaml"
+    dest: /usr/local/bin
+    remote_src: yes
+    mode: '+x'
+
+- name: move json-to-dhall to bin
+  copy:
+    src: "/tmp/bin/json-to-dhall"
+    dest: /usr/local/bin
+    remote_src: yes
+    mode: '+x'

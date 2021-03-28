@@ -1,0 +1,26 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - shell: dhall version
+    register: dhallInstalled
+
+  - shell: dhall-to-json --version
+    register: dhallToJsonInstalled
+
+  - shell: dhall-to-yaml --version
+    register: dhallToYamlInstalled
+
+  - shell: json-to-dhall --version
+    register: jsonToDhallInstalled
+
+  - name: dhall packages installed
+    assert:
+      that: 
+        - "'1.38.1' in dhallInstalled.stdout"
+        - "'1.7.6' in dhallToJsonInstalled.stdout"
+        - "'1.7.6' in dhallToJsonInstalled.stdout"
+        - "'1.7.6' in jsonToDhallInstalled.stdout"

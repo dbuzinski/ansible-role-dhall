@@ -1,0 +1,33 @@
+---
+- name: make sure installation directory exists
+  win_file:
+    path: "{{ windows_install_dir }}"
+    state: directory
+
+- name: download dhall
+  win_get_url:
+    url: "https://github.com/dhall-lang/dhall-haskell/releases/download/{{ dhall_version }}/dhall-{{ dhall_version }}-x86_64-windows.zip"
+    dest: "{{ windows_install_dir }}"
+
+- name: unzip dhall
+  win_unzip:
+    src: "{{ windows_install_dir }}\\dhall-{{ dhall_version }}-x86_64-windows.zip"
+    dest: "{{ windows_install_dir }}"
+    creates: "{{ windows_install_dir }}\\dhall.exe"
+
+- name: download dhall-to-json
+  win_get_url:
+    url: "https://github.com/dhall-lang/dhall-haskell/releases/download/{{ dhall_version }}/dhall-json-{{ dhall_to_json_version }}-x86_64-windows.zip"
+    dest: "{{ windows_install_dir }}"
+
+- name: unzip dhall-to-json
+  win_unzip:
+    src: "{{ windows_install_dir }}\\dhall-json-{{ dhall_to_json_version }}-x86_64-windows.zip"
+    dest: "{{ windows_install_dir }}"
+    creates: "{{ windows_install_dir }}\\dhall-to-json.exe"
+
+- name: update path
+  win_path:
+    elements: "{{ windows_install_dir }}"
+    scope: user
+    state: present

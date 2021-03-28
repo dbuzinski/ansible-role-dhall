@@ -1,0 +1,8 @@
+exclude_paths:
+  - ./molecule
+
+use_default_rules: true
+
+warn_list:
+  - '502'  # All tasks should be named
+  - '305'  # Use shell only when shell functionality is required

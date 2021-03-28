@@ -1,0 +1,51 @@
+---
+dependencies: []
+galaxy_info:
+  author: David Buzinski
+  description: A role to install Dhall configuration language
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.7
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+    - name: Centos
+      versions:
+        - 7
+        - 8
+    - name: Fedora
+      versions:
+        - 31
+        - 32
+        - 33
+        - 34
+        - 35
+    - name: Amazon
+      versions:
+        - Amazon Linux 2
+        - Amazon Linux 1
+    - name: Debian
+      versions:
+        - stretch
+        - buster
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+        - groovy
+    - name: MacOSX
+      versions:
+        - 10.15
+    - name: Windows
+      versions:
+        - 2016
+  galaxy_tags:
+    - dhall
+    - development
+    - automation
+    - haskell
+    - json
+    - yaml
+    - configuration
+    - config
