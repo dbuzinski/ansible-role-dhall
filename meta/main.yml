@@ -1,7 +1,7 @@
 ---
 dependencies: []
 galaxy_info:
-  role_name: Dhall
+  role_name: dhall
   author: David Buzinski
   description: A role to install Dhall configuration language
   license: "license (BSD, MIT)"
