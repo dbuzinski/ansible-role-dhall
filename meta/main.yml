@@ -1,6 +1,7 @@
 ---
 dependencies: []
 galaxy_info:
+  role_name: Dhall
   author: David Buzinski
   description: A role to install Dhall configuration language
   license: "license (BSD, MIT)"
@@ -10,21 +11,10 @@ galaxy_info:
       versions:
         - 7
         - 8
-    - name: Centos
-      versions:
-        - 7
-        - 8
     - name: Fedora
       versions:
         - 31
         - 32
-        - 33
-        - 34
-        - 35
-    - name: Amazon
-      versions:
-        - Amazon Linux 2
-        - Amazon Linux 1
     - name: Debian
       versions:
         - stretch
