@@ -13,7 +13,7 @@ Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    nodejs_version: "1.38.1"
+    dhall_version: "1.38.1"
 
 The version of Dhall to install. "1.38.1" is the default and works on most supported OSes. 
 
